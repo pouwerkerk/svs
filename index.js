@@ -109,6 +109,12 @@ const satisfies_comparator = (p, q) =>
 		? false
 		: cmp_map[q.comparison](compare(p.major, p.minor, p.patch, p.tags, q.major, q.minor, q.patch, q.tags))
 
+const compare_versions = (p, q) => {
+	if (compare(p.major, p.minor, p.patch, p.tags, q.major, q.minor, q.patch, q.tags) > 0)
+		return 1
+	return -1
+}
+
 const satisfies_range = (p, range) => {
 	if (range === STAR_RANGE) return p.tags.length === 0
 
@@ -131,5 +137,6 @@ export {
 	parse_set,
 	parse_range,
 	parse_comparator,
-	parse_version
+	parse_version,
+	compare_versions
 }
